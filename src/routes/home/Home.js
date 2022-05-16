@@ -1,5 +1,6 @@
 import React from "react";
-import Directory from "../components/directory/directory.component";
+import { Outlet } from "react-router-dom";
+import Directory from "../../components/directory/directory.component";
 
 // routes elements is in routes folder
 // home page has menu items: categories
@@ -33,7 +34,12 @@ const Home = () => {
     },
   ];
 
-  return <Directory categories={categories} />;
+  return (
+    <div>
+      <Directory categories={categories} />;
+      <Outlet />
+    </div>
+  );
 };
 
 export default Home;
