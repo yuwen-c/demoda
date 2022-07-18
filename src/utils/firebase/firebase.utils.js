@@ -5,6 +5,7 @@ import {
   signInWithPopup,
   GoogleAuthProvider,
   // FacebookAuthProvider, another authentication provider
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -34,9 +35,14 @@ export const signInWithGoogleRedirect = () => {
   return signInWithRedirect(auth, googleProvider);
 };
 
-// firestore service
+// use firestore service
 export const db = getFirestore();
-export const createUserDocumentFromAuth = async (userAuth) => {
+
+// to store our user data in db
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalInfo = {}
+) => {
   // here userAuth means an user that pass the authentication
   // check if the db ref exists: "user" collection, and the unique key is uid
   const usersDocRef = doc(db, "users", userAuth.uid);
@@ -56,10 +62,19 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createDate,
+        ...additionalInfo,
       });
     } catch (error) {
       console.log("error in creating new user", error);
     }
   }
   return usersDocRef;
+};
+
+// user sign up, create user with firestore service
+export const createAuthUsersWithEmailAndPassword = async (email, password) => {
+  if (email && password) {
+    return await createUserWithEmailAndPassword(auth, email, password);
+  }
+  return;
 };
