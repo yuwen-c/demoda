@@ -6,6 +6,7 @@ import {
 } from "../../utils/firebase/firebase.utils";
 import SignUpForm from "../../components/sign-up-form/sign-up-form";
 import SignInForm from "../../components/sign-in-form/sign-in-form";
+import "./authentication.style.scss";
 
 const Authentication = () => {
   useEffect(() => {
@@ -22,7 +23,7 @@ const Authentication = () => {
   }, []);
 
   return (
-    <div>
+    <div className="authentication-container">
       <SignInForm />
       <SignUpForm />
     </div>

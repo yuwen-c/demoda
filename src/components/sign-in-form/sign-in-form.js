@@ -29,9 +29,18 @@ const SignInForm = () => {
     event.preventDefault();
     if (password && email) {
       try {
-        await signInWithUsersEmailAndPassword(email, password);
+        const response = await signInWithUsersEmailAndPassword(email, password);
         handleReset();
       } catch (error) {
+        switch (error.code) {
+          case "auth/user-not-found":
+            alert("no user associated with this email");
+            break;
+          case "auth/wrong-password":
+            alert("incorrect password");
+            break;
+          default:
+        }
         console.log("error from sign in", error);
       }
     } else {
