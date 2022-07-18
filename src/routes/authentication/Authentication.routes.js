@@ -2,13 +2,12 @@ import React, { useEffect } from "react";
 import { getRedirectResult } from "firebase/auth";
 import {
   auth,
-  // signInWithGooglePopup,
-  signInWithGoogleRedirect,
   createUserDocumentFromAuth,
 } from "../../utils/firebase/firebase.utils";
 import SignUpForm from "../../components/sign-up-form/sign-up-form";
+import SignInForm from "../../components/sign-in-form/sign-in-form";
 
-const SignIn = () => {
+const Authentication = () => {
   useEffect(() => {
     const getData = async () => {
       const response = await getRedirectResult(auth);
@@ -22,24 +21,12 @@ const SignIn = () => {
     });
   }, []);
 
-  /**
-   * 後來改用GoogleRedirect方法登入，不用pop up
-   */
-  // const logGoogleUser = async () => {
-  //   const response = await signInWithGooglePopup();
-  //   const { user } = response;
-  //   createUserDocumentFromAuth(user);
-  // };
-
   return (
     <div>
-      <h1>sign in page</h1>
-      {/* <button onClick={logGoogleUser}>Sign in with Google popup</button> */}
-      <br />
-      <button onClick={signInWithGoogleRedirect}>Sign in with redirect</button>
+      <SignInForm />
       <SignUpForm />
     </div>
   );
 };
 
-export default SignIn;
+export default Authentication;

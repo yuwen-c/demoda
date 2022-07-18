@@ -1,22 +1,20 @@
 import React, { useState } from "react";
 import {
-  createUserDocumentFromAuth,
-  createAuthUsersWithEmailAndPassword,
+  signInWithGoogleRedirect,
+  signInWithUsersEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
-import "./sign-up-form.styles.scss";
+import "./sign-in-form.styles.scss";
 
 const defaultFormFields = {
-  displayName: "",
   email: "",
   password: "",
-  confirmPassword: "",
 };
 
-const SignUpForm = () => {
+const SignInForm = () => {
   const [formField, setFormField] = useState(defaultFormFields);
-  const { displayName, email, password, confirmPassword } = formField;
+  const { email, password } = formField;
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
@@ -29,38 +27,32 @@ const SignUpForm = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (password === confirmPassword) {
+    if (password && email) {
       try {
-        const response = await createAuthUsersWithEmailAndPassword(
-          email,
-          password
-        );
-        const { user } = response;
-        await createUserDocumentFromAuth(user, {
-          displayName,
-        });
+        await signInWithUsersEmailAndPassword(email, password);
         handleReset();
       } catch (error) {
-        console.log("error in createUser from sign up", error);
+        console.log("error from sign in", error);
       }
     } else {
       return;
     }
   };
 
+  /**
+   * 不用GoogleRedirect方法登入，用pop up
+   */
+  // const logGoogleUser = async () => {
+  //   const response = await signInWithGooglePopup();
+  //   const { user } = response;
+  //   createUserDocumentFromAuth(user);
+  // };
+
   return (
     <div className="sign-up-form-container">
-      <h2>Don't have an account?</h2>
-      <span>Sign up with your email and password</span>
+      <h2>I already have an account</h2>
+      <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
-        <FormInput
-          label="DisplayName"
-          name="displayName"
-          type="text"
-          onChange={handleFieldChange}
-          value={displayName}
-          required
-        />
         <FormInput
           label="Email"
           name="email"
@@ -77,18 +69,19 @@ const SignUpForm = () => {
           value={password}
           required
         />
-        <FormInput
-          label="Confirm password"
-          name="confirmPassword"
-          type="password"
-          onChange={handleFieldChange}
-          value={confirmPassword}
-          required
-        />
-        <Button type="submit">SIGN UP</Button>
+        <div className="button-group">
+          <Button type="submit">SIGN IN</Button>
+          <Button
+            type="button"
+            buttonType="google"
+            onClick={signInWithGoogleRedirect}
+          >
+            SIGN IN WITH Google
+          </Button>
+        </div>
       </form>
     </div>
   );
 };
 
-export default SignUpForm;
+export default SignInForm;
