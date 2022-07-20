@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   signInWithGoogleRedirect,
   signInWithUsersEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
+import { UserContext } from "../../contexts/user.context";
 import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import "./sign-in-form.styles.scss";
@@ -15,6 +16,7 @@ const defaultFormFields = {
 const SignInForm = () => {
   const [formField, setFormField] = useState(defaultFormFields);
   const { email, password } = formField;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleFieldChange = (event) => {
     const { name, value } = event.target;
@@ -29,7 +31,8 @@ const SignInForm = () => {
     event.preventDefault();
     if (password && email) {
       try {
-        const response = await signInWithUsersEmailAndPassword(email, password);
+        const { user } = await signInWithUsersEmailAndPassword(email, password);
+        setCurrentUser(user);
         handleReset();
       } catch (error) {
         switch (error.code) {

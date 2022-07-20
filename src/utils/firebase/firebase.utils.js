@@ -7,6 +7,7 @@ import {
   // FacebookAuthProvider, another authentication provider
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -86,4 +87,8 @@ export const signInWithUsersEmailAndPassword = async (email, password) => {
     return await signInWithEmailAndPassword(auth, email, password);
   }
   return;
+};
+
+export const userSignOut = async () => {
+  return await signOut(auth);
 };
