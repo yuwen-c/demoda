@@ -7,12 +7,8 @@ import "./navigator.scss";
 
 /* Outlet: defined where should the wrapped components being placed. */
 const Navigator = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
 
-  const handleSignOut = async () => {
-    await userSignOut();
-    setCurrentUser(null);
-  };
   return (
     <>
       <div className="navigation">
@@ -24,9 +20,12 @@ const Navigator = () => {
             shop
           </Link>
           {currentUser ? (
-            <span className="nav-link" onClick={handleSignOut}>
-              sign out
-            </span>
+            <>
+              <span>{currentUser.email}</span>
+              <span className="nav-link" onClick={userSignOut}>
+                sign out
+              </span>
+            </>
           ) : (
             <Link className="nav-link" to="/auth">
               sign in
