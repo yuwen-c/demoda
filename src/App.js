@@ -1,9 +1,9 @@
-import "./App.css";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./routes/home/Home";
 import Navigator from "./routes/navigator/Navigator";
 import Authentication from "./routes/authentication/Authentication.routes";
+import Shop from "./routes/shop/shop";
 
 /* routing: 
 1. import Routes from "react-router-dom",
@@ -19,10 +19,6 @@ import Authentication from "./routes/authentication/Authentication.routes";
 like navigator bar, use nested ROUTE and <Outlet> */
 
 /* for nested home page route, use index instead of path */
-
-const Shop = () => {
-  return <h1>I'm the shop page</h1>;
-};
 
 function App() {
   return (
