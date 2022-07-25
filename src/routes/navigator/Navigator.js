@@ -35,7 +35,7 @@ const Navigator = () => {
               sign in
             </Link>
           )}
-          <CartIcon number={cartItems.length || 0} />
+          <CartIcon />
         </div>
         {isCartOpen && <CartDropDown />}
       </div>

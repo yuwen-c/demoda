@@ -13,9 +13,8 @@ export const UserProvider = ({ children }) => {
 
   // subscribe the auth state listener
   /**
-   * useEffect only executes once after mounting (since [])
-   * only the listener keep works!
-   * so the console log in it will only show once
+   * useEffect callback function only executes once after mounting (since [])
+   * then the listener keeps working
    */
   useEffect(() => {
     const unsubscribe = onAuthStateChangedListener((user) => {
