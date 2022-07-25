@@ -11,7 +11,7 @@ import "./navigator.scss";
 /* Outlet: defined where should the wrapped components being placed. */
 const Navigator = () => {
   const { currentUser } = useContext(UserContext);
-  const { isCartOpen, setIsCartOpen } = useContext(CartContext);
+  const { isCartOpen, cartItems } = useContext(CartContext);
 
   return (
     <>
@@ -35,7 +35,7 @@ const Navigator = () => {
               sign in
             </Link>
           )}
-          <CartIcon />
+          <CartIcon number={cartItems.length || 0} />
         </div>
         {isCartOpen && <CartDropDown />}
       </div>

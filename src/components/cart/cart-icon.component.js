@@ -14,7 +14,7 @@ const CartIcon = ({ number }) => {
       }}
     >
       <Cart className="shopping-icon" />
-      <span className="item-count">{number}1</span>
+      <span className="item-count">{number}</span>
     </div>
   );
 };

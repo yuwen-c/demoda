@@ -2,21 +2,43 @@ import React, { useState, createContext, useEffect } from "react";
 
 export const CartContext = createContext({
   isCartOpen: false,
-  list: [],
+  cartItems: [],
   setIsCartOpen: () => {},
-  setList: () => {},
+  addItemToCart: () => {},
 });
+
+const addCartItem = (items, addedItem) => {
+  console.log("addCartItem", items, addedItem);
+  if (items.filter((item) => item.id === addedItem.id).length) {
+    console.log("if");
+    return items.map((item) =>
+      item.id === addedItem.id ? { ...item, quantity: item.quantity + 1 } : item
+    );
+  }
+  console.log("addCartItem return", [...items, { ...addedItem, quantity: 1 }]);
+  return [...items, { ...addedItem, quantity: 1 }];
+};
 
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const [list, setList] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
 
-  const value = { isCartOpen, setIsCartOpen, list, setList };
   // todo: get the original list from fetch
   // anytime when user "add" product, add new item to list
   useEffect(() => {
-    setList([]);
+    setCartItems([]);
   }, []);
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  const addItemToCart = (addedItem) => {
+    setCartItems(addCartItem(cartItems, addedItem));
+  };
+
+  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart };
+
+  return (
+    <div>
+      {console.log("cartItems", cartItems)}
+      <CartContext.Provider value={value}>{children}</CartContext.Provider>
+    </div>
+  );
 };
