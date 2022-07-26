@@ -7,6 +7,7 @@ export const CartContext = createContext({
   setIsCartOpen: () => {},
   addItemToCart: () => {},
   removeItemFromCart: () => {},
+  totalPrice: 0,
 });
 
 /**
@@ -44,19 +45,29 @@ const getNum = (items) => {
   }, 0);
 };
 
+const getTotalPrice = (cartItems) => {
+  return cartItems.reduce((acc, item) => {
+    return acc + item.price * item.quantity;
+  }, 0);
+};
+
 export const CartProvider = ({ children }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [cartItems, setCartItems] = useState([]);
   const [number, setNumber] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
 
   // todo: get the original list from fetch
-  // anytime when user "add" product, add new item to list
   useEffect(() => {
     setCartItems([]);
   }, []);
 
   useEffect(() => {
     setNumber(getNum(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    setTotalPrice(getTotalPrice(cartItems));
   }, [cartItems]);
 
   const addItemToCart = (addedItem) => {
@@ -74,6 +85,7 @@ export const CartProvider = ({ children }) => {
     addItemToCart,
     number,
     removeItemFromCart,
+    totalPrice,
   };
 
   return (

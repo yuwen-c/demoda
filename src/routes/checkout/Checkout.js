@@ -1,46 +1,27 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
+import CheckoutItem from "../../components/checkout-item/checkout-item.component";
+import "./checkout.styles.scss";
 
 const Checkout = () => {
-  const { cartItems, addItemToCart, removeItemFromCart } =
-    useContext(CartContext);
-  const [total, setTotal] = useState(0);
+  const { cartItems, totalPrice } = useContext(CartContext);
 
   // 有更動就要重新計算total
-  useEffect(() => {
-    const totalPrice = cartItems.reduce((acc, item) => {
-      return acc + item.price * item.quantity;
-    }, 0);
-    setTotal(totalPrice);
-  }, [cartItems]);
-
-  const handleAddItem = (product) => {
-    addItemToCart(product);
-  };
-
-  const handleRemove = (product, number) => {
-    removeItemFromCart(product, number);
-  };
 
   return (
-    <>
+    <div className="checkout-container">
+      <div className="checkout-header">
+        <span className="header-block">Product</span>
+        <span className="header-block">Description</span>
+        <span className="header-block">Quantity</span>
+        <span className="header-block">Price</span>
+        <span className="header-block">Remove</span>
+      </div>
       {cartItems.map((item) => {
-        const { id, imageUrl, name, price, quantity } = item;
-        const smallTotal = price * quantity;
-
-        return (
-          <div key={id}>
-            <img src={imageUrl} alt={`${name}`} />
-            <span>{name}</span> <span>{price}</span>
-            <button onClick={() => handleRemove(item, 1)}>minus</button>
-            <span>{quantity}</span>{" "}
-            <button onClick={() => handleAddItem(item)}>add</button>
-            <span>{smallTotal}</span>
-          </div>
-        );
+        return <CheckoutItem product={item} key={item.id} />;
       })}
-      <div>{total}</div>
-    </>
+      <div className="total">Total $ {totalPrice}</div>
+    </div>
   );
 };
 
