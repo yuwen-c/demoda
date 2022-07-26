@@ -10,11 +10,10 @@ const BUTTON_TYPES_ENUM = {
   invert: "inverted",
 };
 
-const Button = ({ children, buttonType, handler, ...otherProps }) => {
+const Button = ({ children, buttonType, ...otherProps }) => {
   return (
     <button
       className={`button-container ${BUTTON_TYPES_ENUM[buttonType]}`}
-      onClick={handler ? handler : null}
       {...otherProps}
     >
       {children}
