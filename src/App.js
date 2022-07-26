@@ -4,6 +4,7 @@ import Home from "./routes/home/Home";
 import Navigator from "./routes/navigator/Navigator";
 import Authentication from "./routes/authentication/Authentication.routes";
 import Shop from "./routes/shop/shop";
+import Checkout from "./routes/checkout/Checkout";
 
 /* routing: 
 1. import Routes from "react-router-dom",
@@ -27,6 +28,7 @@ function App() {
         <Route index element={<Home />} />
         <Route path="shop" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
+        <Route path="checkout" element={<Checkout />} />
       </Route>
     </Routes>
   );

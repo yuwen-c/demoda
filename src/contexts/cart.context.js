@@ -6,6 +6,7 @@ export const CartContext = createContext({
   cartItems: [],
   setIsCartOpen: () => {},
   addItemToCart: () => {},
+  removeItemFromCart: () => {},
 });
 
 /**
@@ -18,6 +19,23 @@ const addCartItem = (items, addedItem) => {
     );
   }
   return [...items, { ...addedItem, quantity: 1 }];
+};
+
+// 可以-1或拿掉整個product
+const removeItem = (items, removedItem, number) => {
+  if (number === 1) {
+    const newArr = items.map((item) =>
+      item.id === removedItem.id
+        ? {
+            ...item,
+            quantity: item.quantity - 1,
+          }
+        : item
+    );
+    return newArr.filter((item) => item.quantity >= 1);
+  } else {
+    return items.filter((item) => item.id !== removedItem.id);
+  }
 };
 
 const getNum = (items) => {
@@ -45,7 +63,18 @@ export const CartProvider = ({ children }) => {
     setCartItems(addCartItem(cartItems, addedItem));
   };
 
-  const value = { isCartOpen, setIsCartOpen, cartItems, addItemToCart, number };
+  const removeItemFromCart = (removedItem, number) => {
+    setCartItems(removeItem(cartItems, removedItem, number));
+  };
+
+  const value = {
+    isCartOpen,
+    setIsCartOpen,
+    cartItems,
+    addItemToCart,
+    number,
+    removeItemFromCart,
+  };
 
   return (
     <div>
