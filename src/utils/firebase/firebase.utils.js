@@ -10,7 +10,17 @@ import {
   signOut,
   onAuthStateChanged,
 } from "firebase/auth";
-import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  getDoc,
+  setDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+  DocumentSnapshot,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyBoroqo2BRmbixmkj2JeuefMmHvAKgGpcU",
@@ -97,3 +107,48 @@ export const userSignOut = async () => {
 // observer function, a listener to watch auth changes
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
+
+// read data and store it to firestore
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
+  const collectionRef = collection(db, collectionKey);
+
+  // store objectData through one successful transaction
+  const batch = writeBatch(db);
+  objectsToAdd.forEach((object) => {
+    const docRef = doc(collectionRef, object.title.toLowerCase());
+    batch.set(docRef, object);
+  });
+  // when everything is ready, fire the transaction
+  await batch.commit();
+};
+
+/**
+ * convert data to map
+ */
+export const getCategoriesAndDocuments = async () => {
+  const collectionRef = collection(db, "categories");
+  const q = query(collectionRef);
+  /**
+   * 一個參數用來接收從資料庫取出的值，大多習慣會命名為 snapshot
+   */
+  const querySnapshot = await getDocs(q);
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    // use data() method to get the decoded data
+    const { title, items } = docSnapshot.data();
+
+    acc[title.toLowerCase()] = {
+      title,
+      items,
+    };
+    return acc;
+  }, {});
+  return categoryMap;
+};
+
+// const map = {
+//   hats: [{}, {}],
+//   sneakers: [{}, {}],
+// };
