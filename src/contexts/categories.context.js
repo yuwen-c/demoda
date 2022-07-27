@@ -4,14 +4,13 @@ import {
   getCategoriesAndDocuments,
 } from "../utils/firebase/firebase.utils";
 // import SHOP_DATA from "../shop-data";
-// import SHOP_DATA from "../shop-data.json"; 可刪
 
-export const ProductsContext = createContext({ products: [] });
+export const CategoriesContext = createContext({ categories: {} });
 
-export const ProductsProvider = ({ children }) => {
+export const CategoriesProvider = ({ children }) => {
   // make api call to firestore to get product data
-  const [products, setProducts] = useState([]);
-  const value = { products };
+  const [categoriesMap, setCategoriesMap] = useState({});
+  const value = { categoriesMap };
 
   /**
    * only do this one time to store our products data.
@@ -23,14 +22,16 @@ export const ProductsProvider = ({ children }) => {
   useEffect(() => {
     const getCategoriesMap = async () => {
       const categoryMap = await getCategoriesAndDocuments();
-      console.log("categoryMap", categoryMap);
+      return categoryMap;
     };
-    getCategoriesMap();
+    getCategoriesMap().then((result) => {
+      setCategoriesMap(result);
+    });
   }, []);
 
   return (
-    <ProductsContext.Provider value={value}>
+    <CategoriesContext.Provider value={value}>
       {children}
-    </ProductsContext.Provider>
+    </CategoriesContext.Provider>
   );
 };
