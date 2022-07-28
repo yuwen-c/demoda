@@ -139,16 +139,9 @@ export const getCategoriesAndDocuments = async () => {
     // use data() method to get the decoded data
     const { title, items } = docSnapshot.data();
 
-    acc[title.toLowerCase()] = {
-      title,
-      items,
-    };
+    acc[title.toLowerCase()] = items;
+
     return acc;
   }, {});
   return categoryMap;
 };
-
-// const map = {
-//   hats: [{}, {}],
-//   sneakers: [{}, {}],
-// };

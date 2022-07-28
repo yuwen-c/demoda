@@ -1,17 +1,21 @@
-import React, { useContext } from "react";
-import { CategoriesContext } from "../../contexts/categories.context";
-import CategoryPreview from "../../components/category-preview/category-preview.component";
-import "./shop.styles.scss";
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import CategoriesPreview from "../categories-preview/Categories-preview";
+import Category from "../category/Category";
+/**
+ * - nested routes: "index" route, which is /shop/*
+ *   will render the categoriesPreview, which contains all categories
+ * - "sub route", which is /shop/hats,
+ *   will render single category
+ */
 
 const Shop = () => {
-  const { categoriesMap = {} } = useContext(CategoriesContext);
-
   return (
-    <>
-      {Object.values(categoriesMap).map((category) => {
-        return <CategoryPreview category={category} key={category?.title} />;
-      })}
-    </>
+    // these routes are going to be relative to the parent route, which is shop/
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+      <Route path=":category" element={<Category />} />
+    </Routes>
   );
 };
 
