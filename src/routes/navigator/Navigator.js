@@ -6,39 +6,42 @@ import { CartContext } from "../../contexts/cart.context";
 import { userSignOut } from "../../utils/firebase/firebase.utils";
 import CartIcon from "../../components/cart/cart-icon.component";
 import CartDropDown from "../../components/cart-dropdown/cart-dropdown.component";
-import "./navigator.scss";
+import {
+  NavigationContainer,
+  LogoContainer,
+  NavLinkContainer,
+  NavLink,
+} from "./navigator.jsx";
 
 /* Outlet: defined where should the wrapped components being placed. */
 const Navigator = () => {
   const { currentUser } = useContext(UserContext);
-  const { isCartOpen, cartItems } = useContext(CartContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <>
-      <div className="navigation">
-        <Link className="logo-container" to="/">
+      <NavigationContainer>
+        <LogoContainer to="/">
           <Logo />
-        </Link>
-        <div className="nav-links-container">
+        </LogoContainer>
+        <NavLinkContainer>
           <Link className="nav-link" to="/shop">
             shop
           </Link>
           {currentUser ? (
             <>
               <span>{currentUser.email}</span>
-              <span className="nav-link" onClick={userSignOut}>
+              <NavLink as="span" onClick={userSignOut}>
                 sign out
-              </span>
+              </NavLink>
             </>
           ) : (
-            <Link className="nav-link" to="/auth">
-              sign in
-            </Link>
+            <NavLink to="/auth">sign in</NavLink>
           )}
           <CartIcon />
-        </div>
+        </NavLinkContainer>
         {isCartOpen && <CartDropDown />}
-      </div>
+      </NavigationContainer>
       <Outlet />
     </>
   );

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { CartContext } from "../../contexts/cart.context";
-import Button from "../button/button";
+import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import "./product-card.styles.scss";
 
 const ProductCard = ({ product }) => {
@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
         <span className="name">{name}</span>
         <span className="price">{price}</span>
       </div>
-      <Button buttonType="inverted" onClick={handleAddItem}>
+      <Button buttonType={BUTTON_TYPES_ENUM.invert} onClick={handleAddItem}>
         ADD TO CART
       </Button>
     </div>

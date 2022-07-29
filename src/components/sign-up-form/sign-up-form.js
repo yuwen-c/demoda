@@ -4,7 +4,7 @@ import {
   createAuthUsersWithEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input";
-import Button from "../button/button";
+import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import "./sign-up-form.styles.scss";
 
 const defaultFormFields = {

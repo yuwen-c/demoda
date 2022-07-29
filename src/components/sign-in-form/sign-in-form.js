@@ -4,7 +4,7 @@ import {
   signInWithUsersEmailAndPassword,
 } from "../../utils/firebase/firebase.utils";
 import FormInput from "../form-input/form-input";
-import Button from "../button/button";
+import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import "./sign-in-form.styles.scss";
 
 const defaultFormFields = {
@@ -82,7 +82,7 @@ const SignInForm = () => {
           <Button type="submit">SIGN IN</Button>
           <Button
             type="button"
-            buttonType="google"
+            buttonType={BUTTON_TYPES_ENUM.google}
             onClick={signInWithGoogleRedirect}
           >
             SIGN IN WITH Google

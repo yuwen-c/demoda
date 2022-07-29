@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../../contexts/cart.context";
-import Button from "../button/button";
+import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import CartItem from "../cart-item/cart-item.component";
 import "./cart-dropdown.styles.scss";
 
@@ -16,7 +16,7 @@ const CartDropDown = () => {
         ))}
       </div>
       <Link to="/checkout">
-        <Button buttonType="inverted">GO TO CHECKOUT</Button>
+        <Button buttonType={BUTTON_TYPES_ENUM.invert}>GO TO CHECKOUT</Button>
       </Link>
     </div>
   );
