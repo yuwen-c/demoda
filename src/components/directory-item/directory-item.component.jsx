@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   BackgroundImageDiv,
   DirectoryContainer,
@@ -8,6 +8,10 @@ import {
 
 const DirectoryItem = ({ category }) => {
   const { imageUrl, title } = category;
+  const navigate = useNavigate();
+  const handleNavigate = (path) => {
+    navigate(path);
+  };
   return (
     <DirectoryContainer>
       <BackgroundImageDiv
@@ -16,10 +20,9 @@ const DirectoryItem = ({ category }) => {
         //   backgroundImage: `url(${imageUrl})`,
         // }}
       />
-      {/* // to={`shop/${title}`} */}
-      <TitleBlock>
-        <h2>{title}</h2>
-        <p>Shop Now</p>
+      <TitleBlock onClick={() => handleNavigate(`shop/${title}`)}>
+        <span>{title}</span>
+        <span>Shop Now</span>
       </TitleBlock>
     </DirectoryContainer>
   );
