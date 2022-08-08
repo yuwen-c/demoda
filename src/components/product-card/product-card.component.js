@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+import { CartContext } from "../../contexts/cart.context_useReducer";
 import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import "./product-card.styles.scss";
 

@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context";
+import { CartContext } from "../../contexts/cart.context_useReducer";
 import { CartSvg, CartSvgContainer, Count } from "./cart-icon.styles";
 
 const CartIcon = () => {

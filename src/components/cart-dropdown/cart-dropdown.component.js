@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import { CartContext } from "../../contexts/cart.context";
+import { CartContext } from "../../contexts/cart.context_useReducer";
 import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import CartItem from "../cart-item/cart-item.component";
 import {
