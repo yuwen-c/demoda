@@ -2,10 +2,12 @@ import React from "react";
 import { render } from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import { UserProvider } from "./contexts/user.context";
 import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context";
 import App from "./App";
+import { store } from "./store/store";
 import "./index.scss";
 
 /* routing
@@ -17,13 +19,15 @@ const rootElement = document.getElementById("root");
 render(
   <React.StrictMode>
     <BrowserRouter>
-      <UserProvider>
+      <Provider store={store}>
+        {/* <UserProvider> */}
         <CategoriesProvider>
           <CartProvider>
             <App />
           </CartProvider>
         </CategoriesProvider>
-      </UserProvider>
+        {/* </UserProvider> */}
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   rootElement
