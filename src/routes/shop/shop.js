@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import CategoriesPreview from "../categories-preview/Categories-preview";
 import Category from "../category/Category";
 import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-import { setCategoriesMap } from "../../store/category/categories.action";
+import { setCategories } from "../../store/category/categories.action";
 /**
  * - nested routes: "index" route, which is /shop/*
  *   will render the categoriesPreview, which contains all categories
@@ -13,17 +13,14 @@ import { setCategoriesMap } from "../../store/category/categories.action";
  */
 
 const Shop = () => {
-  /**
-   * 把categoriesMap的context裡面的useEffect搬過來 (正在改寫成redux)
-   */
   const dispatch = useDispatch();
   useEffect(() => {
     const getCategoriesMap = async () => {
-      const categoryMap = await getCategoriesAndDocuments();
-      return categoryMap;
+      const categoriesArray = await getCategoriesAndDocuments();
+      return categoriesArray;
     };
     getCategoriesMap().then((result) => {
-      dispatch(setCategoriesMap(result));
+      dispatch(setCategories(result));
     });
   }, []);
 

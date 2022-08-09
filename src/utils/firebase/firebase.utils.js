@@ -135,13 +135,5 @@ export const getCategoriesAndDocuments = async () => {
    * 一個參數用來接收從資料庫取出的值，大多習慣會命名為 snapshot
    */
   const querySnapshot = await getDocs(q);
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    // use data() method to get the decoded data
-    const { title, items } = docSnapshot.data();
-
-    acc[title.toLowerCase()] = items;
-
-    return acc;
-  }, {});
-  return categoryMap;
+  return querySnapshot.docs.map((docSnapShot) => docSnapShot.data());
 };

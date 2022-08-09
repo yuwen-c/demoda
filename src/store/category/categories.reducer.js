@@ -1,16 +1,16 @@
 import { CATEGORIES_ACTION_TYPES } from "./categories.types";
 
 const INITIAL_STATE = {
-  categoriesMap: {},
+  categories: [],
 };
 
 export const categoriesReducer = (currentState = INITIAL_STATE, action) => {
   const { type, payload } = action;
   switch (type) {
-    case CATEGORIES_ACTION_TYPES.SET_CATEGORIES_MAP:
+    case CATEGORIES_ACTION_TYPES.SET_CATEGORIES:
       return {
-        currentState, // 即使只會改這部分，也要全部currentState先帶入對嗎？
-        categoriesMap: payload,
+        ...currentState, // 即使只會改這部分，也要全部currentState，而且要spread
+        categories: payload,
       };
     default:
       return currentState;

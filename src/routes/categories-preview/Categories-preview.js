@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { categoriesMap as categoriesMapStore } from "../../store/category/categories.selector";
 // import { CategoriesContext } from "../../contexts/categories.context";
