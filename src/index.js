@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import { UserProvider } from "./contexts/cart.context_useReducer";
+// import { UserProvider } from "./contexts/cart.context_useReducer";
 import { CategoriesProvider } from "./contexts/categories.context";
 import { CartProvider } from "./contexts/cart.context_useReducer";
 import App from "./App";
@@ -21,11 +21,11 @@ render(
     <BrowserRouter>
       <Provider store={store}>
         {/* <UserProvider> */}
-        <CategoriesProvider>
-          <CartProvider>
-            <App />
-          </CartProvider>
-        </CategoriesProvider>
+        {/* <CategoriesProvider> */}
+        <CartProvider>
+          <App />
+        </CartProvider>
+        {/* </CategoriesProvider> */}
         {/* </UserProvider> */}
       </Provider>
     </BrowserRouter>
