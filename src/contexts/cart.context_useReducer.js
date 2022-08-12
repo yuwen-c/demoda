@@ -28,6 +28,7 @@ const CART_ACTION_TYPES = {
 };
 
 const cartReducer = (currentState, action) => {
+  console.log("cartReducer", action);
   const { type, payload = {} } = action;
   /** 優化2: 不需要拆，整個把payload spread即可。 */
   // const { number, cartItems, totalPrice } = payload;

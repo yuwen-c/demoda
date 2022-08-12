@@ -1,17 +1,25 @@
-import React, { useContext } from "react";
-import { CartContext } from "../../contexts/cart.context_useReducer";
+import React from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addItemToCart } from "../../store/cart/cart.action";
+import { cartItemsSelector } from "../../store/cart/cart.selector";
+// import { CartContext } from "../../contexts/cart.context_useReducer";
 import Button, { BUTTON_TYPES_ENUM } from "../button/button";
 import "./product-card.styles.scss";
 
 const ProductCard = ({ product }) => {
   const { imageUrl, name, price } = product;
-  const { addItemToCart } = useContext(CartContext);
+  const cartItems = useSelector(cartItemsSelector);
+  const dispatch = useDispatch();
+  // const { addItemToCart } = useContext(CartContext);
 
   /**
    * 把function宣告在return外面，效能比較好
    * */
+  // const handleAddItem = () => {
+  //   addItemToCart(product);
+  // };
   const handleAddItem = () => {
-    addItemToCart(product);
+    dispatch(addItemToCart(cartItems, product));
   };
 
   return (
