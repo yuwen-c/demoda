@@ -7,7 +7,8 @@ import { Provider } from "react-redux";
 // import { CategoriesProvider } from "./contexts/categories.context";
 // import { CartProvider } from "./contexts/cart.context_useReducer";
 import App from "./App";
-import { store } from "./store/store";
+import { PersistGate } from "redux-persist/integration/react";
+import { store, persistor } from "./store/store";
 import "./index.scss";
 
 /* routing
@@ -23,7 +24,9 @@ render(
         {/* <UserProvider> */}
         {/* <CategoriesProvider> */}
         {/* <CartProvider> */}
-        <App />
+        <PersistGate persistor={persistor}>
+          <App />
+        </PersistGate>
         {/* </CartProvider> */}
         {/* </CategoriesProvider> */}
         {/* </UserProvider> */}
