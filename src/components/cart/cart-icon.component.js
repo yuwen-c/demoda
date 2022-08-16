@@ -8,7 +8,6 @@ import { CartSvg, CartSvgContainer, Count } from "./cart-icon.styles";
 const CartIcon = () => {
   const dispatch = useDispatch();
   const number = useSelector(cartItemsNumberSelector);
-  console.log("icon", number);
   // const { isCartOpen, setIsCartOpen, number } = useContext(CartContext);
 
   const handleCartOpen = () => {

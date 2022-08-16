@@ -1,5 +1,6 @@
 import { compose, createStore, applyMiddleware } from "redux";
 import logger from "redux-logger";
+import { customLogger } from "../middlewares/logger";
 import { rootReducer } from "./root-reducer";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -17,21 +18,12 @@ import storage from "redux-persist/lib/storage";
 // export const store = createStore(rootReducer, undefined, composeEnhancer);
 
 // /** customized logger to break down what's doing inside of a middleware */
-const customLogger = (store) => (next) => (action) => {
-  if (!action.type) {
-    return next(action);
-  }
-  console.log("action: ", action);
-  console.log("current:", store.getState());
-  next(action);
-  console.log("updated: ", store.getState());
-};
+// remove customLogger to separate file
 
 /** use redux-persist to store redux value in local storage,
  *  like cart items,
  *  so that when user refreshes, cara data is being persisted
  */
-
 const persistConfig = {
   key: "root",
   storage,
@@ -41,11 +33,9 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-// persist is not middleware! no need to put it here.
-const middleWares = [customLogger];
+const middleWares = [logger];
 const composeEnhancer = compose(applyMiddleware(...middleWares));
 
 // export const store = createStore(rootReducer, undefined, composeEnhancer);
-
 export const store = createStore(persistedReducer, undefined, composeEnhancer);
 export const persistor = persistStore(store);

@@ -20,11 +20,15 @@ import { createSelector } from "reselect";
 // };
 
 /** version 3, use ReSelect to prevent extra re-render
+ *
+ *  if the cart reducer doesn't change,
+ *  then only the first console shows up (selectCategoryReducer)
+ *  the second and the third won't execute(selectCategories, selectCategoriesMap )
  */
 
 // 拿到 big state 裡面的 categories Reducer
 const selectCategoryReducer = (state) => {
-  console.log("selectCategoryReducer 1");
+  // console.log("selectCategoryReducer 1");
   return state.categories;
 };
 
@@ -32,13 +36,13 @@ const selectCategoryReducer = (state) => {
 /** createSelector:
  * first param is input
  * second param is output
- * 兩兩對應，可參考下方 L.43 例子
+ * 兩兩對應，可參考下方例子
  * 如果input沒有變，就不會執行output，會回傳上次的結果
  */
 const selectCategories = createSelector(
   [selectCategoryReducer],
   (categoriesSlice) => {
-    console.log("selectCategories 2");
+    // console.log("selectCategories 2");
     return categoriesSlice.categories;
   }
 );
@@ -52,7 +56,7 @@ export const selectCategoriesMap = createSelector(
   [selectCategories],
   (categories) =>
     categories.reduce((acc, category) => {
-      console.log("selectCategoriesMap 3");
+      // console.log("selectCategoriesMap 3");
       const { title, items } = category;
       acc[title.toLowerCase()] = items;
 
