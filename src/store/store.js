@@ -33,9 +33,22 @@ const persistConfig = {
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 
-const middleWares = [logger];
-const composeEnhancer = compose(applyMiddleware(...middleWares));
+/**
+ * only log when not being a production mode
+ * filter out the falsy value
+ */
+const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
+  Boolean
+);
 
-// export const store = createStore(rootReducer, undefined, composeEnhancer);
-export const store = createStore(persistedReducer, undefined, composeEnhancer);
+const composeEnhancer =
+  (process.env.NODE_ENV !== "production" &&
+    window &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+  compose;
+// const composeEnhancers = compose(applyMiddleware(...middleWares));
+const composeEnhancers = composeEnhancer(applyMiddleware(...middleWares));
+
+// export const store = createStore(rootReducer, undefined, composeEnhancers);
+export const store = createStore(persistedReducer, undefined, composeEnhancers);
 export const persistor = persistStore(store);
