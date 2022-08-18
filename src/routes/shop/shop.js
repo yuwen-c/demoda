@@ -3,8 +3,9 @@ import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import CategoriesPreview from "../categories-preview/Categories-preview";
 import Category from "../category/Category";
-import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
-import { setCategories } from "../../store/category/categories.action";
+import { fetchCategoriesAsync } from "../../store/category/categories.action";
+// import { getCategoriesAndDocuments } from "../../utils/firebase/firebase.utils";
+// import { setCategories } from "../../store/category/categories.action";
 /**
  * - nested routes: "index" route, which is /shop/*
  *   will render the categoriesPreview, which contains all categories
@@ -14,14 +15,18 @@ import { setCategories } from "../../store/category/categories.action";
 
 const Shop = () => {
   const dispatch = useDispatch();
+  // useEffect(() => {
+  //   const getCategoriesMap = async () => {
+  //     const categoriesArray = await getCategoriesAndDocuments();
+  //     return categoriesArray;
+  //   };
+  //   getCategoriesMap().then((result) => {
+  //     dispatch(setCategories(result));
+  //   });
+  // }, []);
+
   useEffect(() => {
-    const getCategoriesMap = async () => {
-      const categoriesArray = await getCategoriesAndDocuments();
-      return categoriesArray;
-    };
-    getCategoriesMap().then((result) => {
-      dispatch(setCategories(result));
-    });
+    dispatch(fetchCategoriesAsync());
   }, []);
 
   return (

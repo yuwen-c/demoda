@@ -3,6 +3,7 @@ import logger from "redux-logger";
 import { customLogger } from "../middlewares/logger";
 import { rootReducer } from "./root-reducer";
 import { persistStore, persistReducer } from "redux-persist";
+import thunk from "redux-thunk";
 import storage from "redux-persist/lib/storage";
 
 /** a simple version w/o logger helper */
@@ -37,9 +38,10 @@ const persistedReducer = persistReducer(persistConfig, rootReducer);
  * only log when not being a production mode
  * filter out the falsy value
  */
-const middleWares = [process.env.NODE_ENV !== "production" && logger].filter(
-  Boolean
-);
+const middleWares = [
+  process.env.NODE_ENV !== "production" && logger,
+  thunk,
+].filter(Boolean);
 
 const composeEnhancer =
   (process.env.NODE_ENV !== "production" &&
