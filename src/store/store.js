@@ -28,8 +28,9 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "root",
   storage,
-  blacklist: ["users"],
+  // blacklist: ["users"],
   // since user is being monitored by authStateChange
+  whiteList: ["cart"],
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
