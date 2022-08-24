@@ -21,7 +21,7 @@ const Category = () => {
   }, [categoriesMap, category]);
 
   return (
-    <>
+    <div className="category-body">
       <h2 className="category-title">{category.toUpperCase()}</h2>
       {isLoading ? (
         <Spinner />
@@ -32,7 +32,7 @@ const Category = () => {
           ))}
         </div>
       )}
-    </>
+    </div>
   );
 };
 
