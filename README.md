@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# demoda 購物網 - 一站買齊你的時尚配件 🛍🛒
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+> 以 React 框架建構，搭配 Redux 狀態管理，firebase 三方登入功能，帶給你流暢的購物體驗！
 
-## Available Scripts
+## [立即試用](https://yuwen-demoda.netlify.app/)
 
-In the project directory, you can run:
+## 放截圖
 
-### `yarn start`
+## User Story (drawio)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- home page -> choose what you're interested -> shop page -> put the item into cart -> click checkout button -> checkout page
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## structure
 
-### `yarn test`
+- 前端 <-> 後端 firebase
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## features
 
-### `yarn build`
+### login/ register/ login with google acount
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### store product data in firestore
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 使用技術
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+💡 使用 React 作為前端框架
 
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 語法類似 javascript，元件各自獨立且可重複使用。
+  💡 使用 Redux 做狀態管理
+- 將 function 與資料拆分，方便管理及利於 scale，生態系豐富。
+  💡 使用 Redux-Thunk 做 async 的狀態管理
+- 完全將狀態管理交給 reducer，UI component 只需要接收資料。
+  💡 使用 React-Hooks
+- 將元件中的邏輯獨立拆分，閱讀性較高。
+  💡 使用 React-Router 達到路由功能
+- declarative，配置容易，可讀性高。
+  💡 利用 Firebase 做第三方登入
+- 強大、安全、便利的服務。
+  💡 使用 Redux-Persist 記住購物車物品
+- 可設定黑名單及白名單。
+  💡 styled component 做出 css 效果
+- CSS in javacscript，避免全域的 css 衝突，可傳參數控制樣式。
+  💡 部署在 Netlify 上
+- 與 github 同步，只要推送到特定分支，即可自動部署。
