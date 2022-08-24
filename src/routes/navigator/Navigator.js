@@ -1,5 +1,5 @@
 import React from "react";
-import { Outlet, Link } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { cartIsOpenSelector } from "../../store/cart/cart.selector";
 import { ReactComponent as Logo } from "../../assets/crown.svg";
@@ -13,7 +13,7 @@ import {
   LogoContainer,
   NavLinkContainer,
   NavLink,
-} from "./navigator.jsx";
+} from "./navigator.styles.jsx";
 import { selectCurrentUser } from "../../store/user/user.selector";
 
 /* Outlet: defined where should the wrapped components being placed. */
@@ -30,18 +30,15 @@ const Navigator = () => {
           <Logo />
         </LogoContainer>
         <NavLinkContainer>
-          <Link className="nav-link" to="/shop">
-            shop
-          </Link>
+          <NavLink to="/shop">SHOP</NavLink>
           {currentUser ? (
             <>
-              <span>{currentUser.email}</span>
               <NavLink as="span" onClick={userSignOut}>
-                sign out
+                SIGN OUT
               </NavLink>
             </>
           ) : (
-            <NavLink to="/auth">sign in</NavLink>
+            <NavLink to="/auth">SIGN IN</NavLink>
           )}
           <CartIcon />
         </NavLinkContainer>
